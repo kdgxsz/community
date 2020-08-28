@@ -113,7 +113,7 @@ public class AlphaController {
     @ResponseBody
     public Map<String, Object> getEmp() {
         Map<String, Object> emp = new HashMap<>();
-        emp.put("name","李四");
+        emp.put("name", "李四");
         emp.put("age", 22);
         emp.put("salary", 8000);
         return emp;
@@ -125,19 +125,19 @@ public class AlphaController {
         List<Map<String, Object>> list = new ArrayList<>();
 
         Map<String, Object> emp = new HashMap<>();
-        emp.put("name","张三");
+        emp.put("name", "张三");
         emp.put("age", 22);
         emp.put("salary", 8000);
         list.add(emp);
 
         emp = new HashMap<>();
-        emp.put("name","李四");
+        emp.put("name", "李四");
         emp.put("age", 23);
         emp.put("salary", 6000);
         list.add(emp);
 
         emp = new HashMap<>();
-        emp.put("name","王五");
+        emp.put("name", "王五");
         emp.put("age", 21);
         emp.put("salary", 5000);
         list.add(emp);

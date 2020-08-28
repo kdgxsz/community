@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
  */
 @Repository //DAO层注解bean名字默认为类名首字母小写
 @Primary //优先装配bean
-public class AlphaDaoMyBatisImpl implements AlphaDao{
+public class AlphaDaoMyBatisImpl implements AlphaDao {
 
     @Override
     public String select() {

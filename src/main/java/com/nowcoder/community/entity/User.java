@@ -3,20 +3,22 @@ package com.nowcoder.community.entity;
 import java.util.Date;
 
 /**
+ * user表对应的实体类
+ *
  * @author 尚郑
  */
 public class User {
 
-    private int id;
-    private String username;
-    private String password;
-    private String salt;
-    private String email;
-    private int type;
-    private int status;
-    private String activationCode;
-    private String headerUrl;
-    private Date createTime;
+    private int id;  //主键(自增长)
+    private String username; //用户名
+    private String password; //密码
+    private String salt; //防止密码太过简单添加4位随机字符
+    private String email; //邮箱
+    private int type; //用户类型 0-普通用户; 1-超级管理员; 2-版主;
+    private int status; //状态 0-未激活; 1-已激活
+    private String activationCode; //激活码
+    private String headerUrl;  //头像地址
+    private Date createTime;  //创建时间
 
 
     public int getId() {
