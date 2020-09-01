@@ -1,8 +1,11 @@
 package com.nowcoder.community;
 
+import com.nowcoder.community.entity.User;
+import com.nowcoder.community.util.CommunityUtil;
 import com.nowcoder.community.util.MailClient;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
 import org.thymeleaf.TemplateEngine;
@@ -22,6 +25,12 @@ public class MailTests {
     @Autowired
     private TemplateEngine templateEngine;
 
+    @Value("${community.path.domain}")
+    private String domain;
+
+    @Value("${server.servlet.context-path}")
+    private String contextPath;
+
     @Test
     public void testTextMail(){
         mailClient.sendMail("3137075617@qq.com","TEST","Welcome.");
@@ -36,4 +45,5 @@ public class MailTests {
         System.out.println(content);
         mailClient.sendMail("3137075617@qq.com","HTML",content);
     }
+
 }
