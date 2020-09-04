@@ -10,8 +10,8 @@ public class LoginTicket {
 
     private int id;
     private int userId;
-    private String ticket;
-    private int status;
+    private String ticket; // 随机的身份码
+    private int status; // 0-有效; 1-无效;',
     private Date expired;
 
     public int getId() {
