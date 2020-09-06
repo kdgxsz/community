@@ -4,7 +4,7 @@ import com.nowcoder.community.entity.LoginTicket;
 import org.apache.ibatis.annotations.*;
 
 /**
- *
+ * 用户登录的Dao接口
  * @author 尚郑
  */
 @Mapper

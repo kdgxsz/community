@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 /**
+ * 帖子的Dao接口
  * @author 尚郑
  */
 @Mapper
@@ -30,6 +31,21 @@ public interface DiscussPostMapper {
      * @return 帖子总数 (传用户id则查出该用户的总帖子数,否则查出拉黑之外总帖数)
      */
     int selectDiscussPostRows(@Param("userId") int userId);
+
+    /**
+     * 发布帖子
+     * @param discussPost 标题和内容
+     * @return 添加条数
+     */
+    int insertDiscussPost(DiscussPost discussPost);
+
+    /**
+     * 通过id查询帖子
+     * @param id 帖子的id
+     * @return 一个帖子对象
+     */
+    DiscussPost selectDiscussPostById(int id);
+
 
 
 }
