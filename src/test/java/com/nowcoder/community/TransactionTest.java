@@ -1,26 +1,31 @@
 package com.nowcoder.community;
 
-import com.nowcoder.community.util.SensitiveFilter;
+import com.nowcoder.community.service.AlphaService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
 
 /**
- * 测试过滤敏感词汇
+ * 测试事务的隔离级别
  * @author 尚郑
  */
 @SpringBootTest
 @ContextConfiguration(classes = CommunityApplication.class)
-public class SensitiveTests {
+public class TransactionTest {
 
     @Autowired
-    private SensitiveFilter sensitiveFilter;
+    private AlphaService alphaService;
 
     @Test
-    public void testSensitiveFilter(){
-        String text = "这里可以赌♣博,可以♠嫖■娼,可以♦吸♥毒,傻逼！";
-        text = sensitiveFilter.filter(text);
-        System.out.println(text);
+    public void testSave1() {
+        Object obj = alphaService.save1();
+        System.out.println(obj);
+    }
+
+    @Test
+    public void testSave2() {
+        Object obj = alphaService.save2();
+        System.out.println(obj);
     }
 }
