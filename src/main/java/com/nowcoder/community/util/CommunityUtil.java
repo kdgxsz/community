@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.UUID;
 
 /**
+ * 工具类
  * @author 尚郑
  */
 public class CommunityUtil {
@@ -32,6 +33,11 @@ public class CommunityUtil {
         return DigestUtils.md5DigestAsHex(key.getBytes());
     }
 
+    /**
+     * 获取JSON字符串
+     * @param code 状态码
+     * @param msg 提示信息
+     */
     public static String getJSONString(int code, String msg, Map<String, Object> map) {
         JSONObject json = new JSONObject();
         json.put("code", code);
