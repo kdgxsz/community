@@ -168,7 +168,7 @@ public class LoginController implements CommunityConstant {
             return "/site/login";
         }
 
-        //检查账号,密码
+        // 检查账号,密码
         // 是否选择记住我
         int expiredSeconds = rememberme ? REMEMBER_EXPIRED_SECONDS :DEFAULT_EXPIRED_SECONDS;
         Map<String, Object> map = userService.Login(username, password, expiredSeconds);
