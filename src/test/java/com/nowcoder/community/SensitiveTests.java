@@ -1,15 +1,18 @@
 package com.nowcoder.community;
 
 import com.nowcoder.community.util.SensitiveFilter;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringRunner;
 
 /**
  * 测试过滤敏感词汇
  * @author 尚郑
  */
+@RunWith(SpringRunner.class)
 @SpringBootTest
 @ContextConfiguration(classes = CommunityApplication.class)
 public class SensitiveTests {

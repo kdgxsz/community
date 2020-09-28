@@ -1,5 +1,6 @@
 package com.nowcoder.community.controller;
 
+import com.nowcoder.community.annotation.LoginRequired;
 import com.nowcoder.community.entity.Event;
 import com.nowcoder.community.entity.User;
 import com.nowcoder.community.event.EventProducer;
@@ -35,30 +36,34 @@ public class LikeController implements CommunityConstant {
     @ResponseBody
     public String like(int entityType, int entityId, int entityUserId, int postId) {
         User user = hostHolder.getUser();
+        // 如果没有登录去登陆
+        if (user == null){
+            return CommunityUtil.getJSONString(1,"请先登录！");
+        }else {
+            // 点赞
+            likeService.like(user.getId(), entityType, entityId, entityUserId);
+            // 数量
+            long likeCount = likeService.findEntityLikeCount(entityType, entityId);
+            // 状态
+            int likeStatus = likeService.findEntityLikeStatus(user.getId(), entityType, entityId);
 
-        // 点赞
-        likeService.like(user.getId(), entityType, entityId, entityUserId);
-        // 数量
-        long likeCount = likeService.findEntityLikeCount(entityType, entityId);
-        // 状态
-        int likeStatus = likeService.findEntityLikeStatus(user.getId(), entityType, entityId);
+            Map<String, Object> map = new HashMap<>();
+            map.put("likeCount", likeCount);
+            map.put("likeStatus", likeStatus);
 
-        Map<String, Object> map = new HashMap<>();
-        map.put("likeCount", likeCount);
-        map.put("likeStatus", likeStatus);
+            // 触发点赞事件
+            if (likeStatus == 1) {
+                Event event = new Event()
+                        .setTopic(TOPIC_LIKE)
+                        .setUserId(hostHolder.getUser().getId())
+                        .setEntityType(entityType)
+                        .setEntityId(entityId)
+                        .setEntityUserId(entityUserId)
+                        .setData("postId", postId);
+                eventProducer.fireEvent(event);
+            }
 
-        // 触发点赞事件
-        if (likeStatus == 1) {
-            Event event = new Event()
-                    .setTopic(TOPIC_LIKE)
-                    .setUserId(hostHolder.getUser().getId())
-                    .setEntityType(entityType)
-                    .setEntityId(entityId)
-                    .setEntityUserId(entityUserId)
-                    .setData("postId", postId);
-            eventProducer.fireEvent(event);
+            return CommunityUtil.getJSONString(0, null, map);
         }
-
-        return CommunityUtil.getJSONString(0, null, map);
     }
 }

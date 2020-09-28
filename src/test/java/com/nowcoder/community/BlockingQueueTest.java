@@ -1,6 +1,5 @@
 package com.nowcoder.community;
 
-import org.junit.jupiter.api.Test;
 
 import java.util.Random;
 import java.util.concurrent.ArrayBlockingQueue;

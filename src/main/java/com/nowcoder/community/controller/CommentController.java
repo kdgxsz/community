@@ -1,5 +1,6 @@
 package com.nowcoder.community.controller;
 
+import com.nowcoder.community.annotation.LoginRequired;
 import com.nowcoder.community.entity.Comment;
 import com.nowcoder.community.entity.DiscussPost;
 import com.nowcoder.community.entity.Event;
@@ -37,6 +38,7 @@ public class CommentController implements CommunityConstant {
     @Autowired
     private DiscussPostService discussPostService;
 
+    @LoginRequired
     @RequestMapping(path = "/add/{discussPostId}", method = RequestMethod.POST)
     public String addComment(@PathVariable("discussPostId") int discussPostId, Comment comment) {
         comment.setUserId(hostHolder.getUser().getId());
@@ -55,13 +57,23 @@ public class CommentController implements CommunityConstant {
         if (comment.getEntityType() == ENTITY_TYPE_POST) {
             // 评论的是帖子
             DiscussPost target = discussPostService.findDiscussPostById(comment.getEntityId());
-            event.setUserId(target.getUserId());
+            event.setEntityUserId(target.getUserId());
         } else if (comment.getEntityType() == ENTITY_TYPE_COMMENT) {
             // 评论的是评论
             Comment target = commentService.findCommentById(comment.getEntityId());
-            event.setUserId(target.getUserId());
+            event.setEntityUserId(target.getUserId());
         }
         eventProducer.fireEvent(event);
+
+        if (comment.getEntityType() == ENTITY_TYPE_POST){
+            // 触发发帖事件
+            event = new Event()
+                    .setTopic(TOPIC_PUBLISH)
+                    .setUserId(comment.getUserId())
+                    .setEntityType(ENTITY_TYPE_POST)
+                    .setEntityId(discussPostId);
+            eventProducer.fireEvent(event);
+        }
         return "redirect:/discuss/detail/" + discussPostId;
     }
 
