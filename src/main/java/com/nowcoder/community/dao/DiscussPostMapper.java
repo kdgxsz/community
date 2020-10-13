@@ -8,6 +8,7 @@ import java.util.List;
 
 /**
  * 帖子的Dao接口
+ *
  * @author 尚郑
  */
 @Mapper
@@ -34,6 +35,7 @@ public interface DiscussPostMapper {
 
     /**
      * 发布帖子
+     *
      * @param discussPost 标题和内容
      * @return 添加条数
      */
@@ -41,19 +43,34 @@ public interface DiscussPostMapper {
 
     /**
      * 通过id查询帖子
+     *
      * @param id 帖子的id
      * @return 一个帖子对象
      */
     DiscussPost selectDiscussPostById(int id);
 
     /**
-     *
      * @param id
      * @param commentCount
      * @return
      */
     int updateCommentCount(int id, int commentCount);
 
+    /**
+     * 更改帖子类型
+     * @param id 帖子Id
+     * @param type 帖子类型 0-普通; 1-置顶
+     * @return
+     */
+    int updateType(int id, int type);
+
+    /**
+     * 根据帖子id更改帖子状态
+     * @param id  帖子id
+     * @param status 帖子状态 0-正常; 1-精华; 2-拉黑;
+     * @return
+     */
+    int updateStatus(int id, int status);
 
 
 }
