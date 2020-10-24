@@ -16,7 +16,8 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * 网站数据统计,往redis中存入数据
+ * 网站数据统计,往redis中存入uv(访问量)和dau(活跃用户)数据
+ *
  * @author 尚郑
  */
 @Service

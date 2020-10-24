@@ -22,7 +22,7 @@ public interface DiscussPostMapper {
      * @param limit  每页展示行数
      * @return 帖子集合
      */
-    List<DiscussPost> selectDiscussPost(int userId, int offset, int limit);
+    List<DiscussPost> selectDiscussPost(int userId, int offset, int limit, int orderMode);
 
 
     /**
@@ -71,6 +71,14 @@ public interface DiscussPostMapper {
      * @return
      */
     int updateStatus(int id, int status);
+
+    /**
+     * 更新帖子分数
+     * @param id 帖子id
+     * @param score 帖子分数
+     * @return
+     */
+    int updateScore(int id, double score);
 
 
 }
