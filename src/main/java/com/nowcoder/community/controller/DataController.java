@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import java.util.Date;
 
 /**
+ * 统计网站UV(不同的ip主机)和活跃人数(用户)
  * @author 尚郑
  */
 @Controller
